@@ -6,7 +6,7 @@ function checkExists()
 	// Searches the DOM for the correct element
 	var popUpExists = document.getElementById('av-hover');
 
-	// If the RT element has already been created and added, this check will fail/ result in false
+	// If the RT element has already been created and added, this check will fail / result in false
 	if(document.getElementsByClassName("Rotten-Tomatoes")[0] == null)
 	{
 		var RTClassDoesNotExist = true;
@@ -41,21 +41,39 @@ function checkExists()
 		popcornImage.src = "https://i.ibb.co/KyBKKB5/r-t-audiencev2.jpg";
 		document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
 
+		const url = 'https://rottentomatoes.com/m/toy_story';
+		const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
-		// Creates a new span, ...
-		var ratingSpan = document.createElement("span");
-		var textnode = document.createTextNode(" 9.5");
-		ratingSpan.appendChild(textnode);
+		fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+    		.then(function(response) {
+    		return response.text()
+    		})
+    	.then(function(html) {
+			var parser = new DOMParser();
+			var doc = parser.parseFromString(html, "text/html");
+			//console.log(doc);
+			var docArticle = doc.getElementsByClassName("mop-ratings-wrap__percentage")[1].innerHTML;
+			console.log(docArticle);
 
-		// 
-		RTspan.style.display = "flex";
+			// Creates a new span, ...
+			var ratingSpan = document.createElement("span");
+			var textnode = document.createElement("p");
+			textnode.innerHTML = docArticle;
+			ratingSpan.appendChild(textnode);
 
-		// 
-		ratingSpan.setAttribute("style","padding-top:8px; padding-left:4px;");
+			// 
+			RTspan.style.display = "flex";
 
-		//... and appends it to the RTspan
-		document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan); 
-	
+			// 
+			ratingSpan.setAttribute("style","padding-top:8px; padding-left:4px;");
+
+			//... and appends it to the RTspan
+			document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan); 
+
+			})
+			.catch(function(err) {  
+			console.log('Failed to fetch page: ', err);  
+		});
 	}
 }
 //Refreshes the page every quarter second to check for the existence of the popup
