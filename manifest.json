@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "RtReviewOverlay",
+  "description": "Rotten, or Fresh?",
+  "version": "0.1",
+
+  "content_scripts": [{
+    "matches": [
+      "https://www.amazon.com/*"
+    ],
+    "js":["contentscript.js"]
+  }],
+
+  "permissions": [
+    "*://*.rottentomatoes.com/*"
+],
+
+  "icons": {
+    "16": "images/r_t16.png",
+    "32": "images/r_t32.png",
+    "48": "images/r_t48.png",
+    "128": "images/r_t128.png"
+  }
+}
