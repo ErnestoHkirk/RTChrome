@@ -41,7 +41,39 @@ function checkExists()
 		popcornImage.src = "https://i.ibb.co/KyBKKB5/r-t-audiencev2.jpg";
 		document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
 
-		const url = 'https://rottentomatoes.com/m/toy_story';
+		//First i need to get the name of the item
+		var x = document.getElementsByClassName("av-hover-content av-narrow")[0].firstChild.innerHTML;
+		var z = x.indexOf('>');
+		var titleOfMedia = "";
+		z += 1;
+
+		while (x.charAt(z) != '<')
+		{
+			if(x.charAt(z) == ' ')
+			{
+			titleOfMedia = titleOfMedia + '_';
+			}
+			else if((x.charAt(z) == ',') || (x.charAt(z) == '!') || (x.charAt(z) == ':') || (x.charAt(z) == "'" ))
+			{}
+			else
+			{
+			titleOfMedia = titleOfMedia + x.charAt(z);
+			}
+			++z;
+		}
+
+		console.log(titleOfMedia);
+		console.log(z);
+		console.log(x);
+
+		//Then i need to pass that in to a text variable
+		//Then i need to send that text variable to rotten tomatoes
+		//to their search
+		//grab first link
+		//get to first link page
+
+		// Url's passed in
+		const url = 'https://rottentomatoes.com/m/' + titleOfMedia;
 		const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
 		fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
