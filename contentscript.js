@@ -41,36 +41,16 @@ function checkExists()
 		popcornImage.src = "https://i.ibb.co/KyBKKB5/r-t-audiencev2.jpg";
 		document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
 
-		//First i need to get the name of the item
-		// var x = document.getElementsByClassName("av-hover-content av-narrow")[0].firstChild.innerHTML;
-		// var z = x.indexOf('>');
-		// var titleOfMedia = "";
-		// z += 1;
+		// Grabs the year the media was made
+		var titleYear = document.getElementsByClassName('av-badges')[0].firstChild.innerText;
 
-		// while (x.charAt(z) != '<')
-		// {
-		// 	if(x.charAt(z) == ' ')
-		// 	{
-		// 	titleOfMedia = titleOfMedia + '_';
-		// 	}
-		// 	else if((x.charAt(z) == ',') || (x.charAt(z) == '!') || (x.charAt(z) == ':') || (x.charAt(z) == "'" ))
-		// 	{}
-		// 	else
-		// 	{
-		// 	titleOfMedia = titleOfMedia + x.charAt(z);
-		// 	}
-		// 	++z;
-		// }
-
-		// console.log(titleOfMedia);
-		// console.log(z);
-		// console.log(x);
-
-		// const url = 'https://rottentomatoes.com/m/' + titleOfMedia;
+		// Checks for correct element
+		if (titleYear.length > 4)
+		{
+			titleYear = document.getElementsByClassName('av-badges')[0].children[1].innerText;
+		}
 
 		const proxyurl = "https://cors-anywhere.herokuapp.com/";
-
-		// console.log(proxyurl + url);
 
 		var titleOfMedia = document.getElementsByClassName("av-hover-content av-narrow")[0].firstChild.firstChild.innerText;
 		
@@ -78,7 +58,7 @@ function checkExists()
 
 		console.log(formattedTitle);
 
-		url = proxyurl + 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20rating';
+		url = proxyurl + 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20(' + titleYear + ')';
 
 		console.log(url);
 
@@ -140,6 +120,8 @@ function checkExists()
 
 				//... and appends it to the RTspan
 				document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan); 
+
+				console.log(titleYear);
 			})
 			
 
