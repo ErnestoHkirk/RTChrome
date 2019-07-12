@@ -35,23 +35,43 @@ chrome.runtime.onMessage.addListener(
 				var doc = parser.parseFromString(html, "text/html");
 				var docArticle;
 
-				if(doc.getElementsByClassName("mop-ratings-wrap__prerelease-text")[0])
-				{
-					if(doc.getElementsByClassName("mop-ratings-wrap__percentage")[0].innerHTML)
-					{
-					docArticle = doc.getElementsByClassName("mop-ratings-wrap__percentage")[0].innerHTML;
-					}
-					else
-					{
-					docArticle = "DNE";
-					}
-				}
-				else
-				{
-					docArticle = doc.getElementsByClassName("mop-ratings-wrap__percentage")[1].innerHTML;
-				}
-                console.log(docArticle);	
+                var onlyOneElementExists = false;
+
+                if(doc.getElementsByClassName("mop-ratings-wrap__percentage")[1] === undefined) { 
+                    console.log("Only one element exists"); 
+                    onlyOneElementExists = true;
+                }
+
+                if(onlyOneElementExists)
+                {
+                    docArticle = doc.getElementsByClassName("mop-ratings-wrap__percentage")[0].innerHTML
+                }
+                else
+                {
+                    docArticle = doc.getElementsByClassName("mop-ratings-wrap__percentage")[1].innerHTML
+                }
                 
+                //
+                var numUserRatings;
+                var numUserRatings2;
+
+                numUserRatings = doc.getElementsByClassName("mop-ratings-wrap__text--small")[2].innerHTML
+                numUserRatings2 = doc.getElementsByClassName("mop-ratings-wrap__text--small")[3].innerHTML
+
+                if(numUserRatings.includes("User"))
+                {
+                    numUserRatings = doc.getElementsByClassName("mop-ratings-wrap__text--small")[2].innerHTML
+                }
+
+                if(numUserRatings2.includes("User"))
+                {
+                    numUserRatings = doc.getElementsByClassName("mop-ratings-wrap__text--small")[3].innerHTML
+                }
+
+                // numUserRatings = numUserRatings.replace(/\s+/g, '');
+
+                docArticle = docArticle + '  ' + '━' + '  ' + numUserRatings;
+
                 sendResponse(docArticle.link(url2));
 			    })
 			})
