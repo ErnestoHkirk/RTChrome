@@ -13,8 +13,14 @@
   }],
 
   "permissions": [
-    "*://*.rottentomatoes.com/*"
-],
+    
+    "*://*.rottentomatoes.com/*",
+    "*://*.google.com/*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
 
   "icons": {
     "16": "images/r_t16.png",
