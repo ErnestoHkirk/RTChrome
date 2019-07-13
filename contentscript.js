@@ -1,5 +1,3 @@
-console.log("Hello, world!");
-
 //Checks for the existence of the pop-up
 function checkExists()
 {
@@ -36,11 +34,11 @@ function checkExists()
 		// inserts the new rotten tomatoes class before the last child element in the amazon parent class
 		AZparentClass.insertBefore(RTspan,AZfinalChild);
 
-		// Creates a new image, and appends it to the RTspan
-		var popcornImage = new Image();
-		popcornImage.src = "https://i.ibb.co/KyBKKB5/r-t-audiencev2.jpg";
-		document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
-
+		// Creates a loading image
+		var loading = document.createElement("img");
+		loading.src = chrome.extension.getURL("images/loading.gif");
+		document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(loading); 
+		
 		// Grabs the year the media was made
 		var titleYear = document.getElementsByClassName('av-badges')[0].firstChild.innerText;
 
@@ -50,22 +48,15 @@ function checkExists()
 			titleYear = document.getElementsByClassName('av-badges')[0].children[1].innerText;
 		}
 
-		const proxyurl = "https://cors-anywhere.herokuapp.com/";
-
 		var titleOfMedia = document.getElementsByClassName("av-hover-content av-narrow")[0].firstChild.firstChild.innerText;
 		
 		var formattedTitle = titleOfMedia.split(' ').join('%20');
-
-		console.log(formattedTitle);
-
-		// url = proxyurl + 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20(' + titleYear + ')';
 
 		url = 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20(' + titleYear + ')';
 
 		chrome.runtime.sendMessage(
 			url,
 			function (response) {
-				console.log(response);
 
 				// Creates a new span, ...
 				var ratingSpan = document.createElement("span");
@@ -73,22 +64,25 @@ function checkExists()
 				textnode.innerHTML = response + ' ';
 				ratingSpan.appendChild(textnode);
 
-				// 
+				// Creates a new image element, grabs url, and appends it to the RTspan
+				var popcornImage = document.createElement("img");
+				popcornImage.src = chrome.extension.getURL("images/popimage.png");
+
+				document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
+
+				// Styling for the entire RTspan class
 				RTspan.style.display = "flex";
 
-				// 
+				// Styling for the ratingSpan class
 				ratingSpan.setAttribute("style","padding-top:8px; padding-left:4px;");
+
+				// removes the loading image from the new RT class span
+				RTspan.removeChild(loading);
 
 				//... and appends it to the RTspan
 				document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan); 
-
-				console.log(titleYear);
 			}
 		);
-		
-		
-
-		//console.log(url);
 	}
 }
 //Refreshes the page every quarter second to check for the existence of the popup

@@ -22,10 +22,12 @@
     "scripts": ["background.js"]
   },
 
+  "web_accessible_resources": ["images/*.gif", "images/*.png"],
+
   "icons": {
-    "16": "images/r_t16.png",
-    "32": "images/r_t32.png",
-    "48": "images/r_t48.png",
-    "128": "images/r_t128.png"
+    "16": "images/pop_16.png",
+    "32": "images/pop_32.png",
+    "48": "images/pop_48.png",
+    "128": "images/pop_128.png"
   }
 }
