@@ -1,13 +1,13 @@
 {
   "manifest_version": 2,
 
-  "name": "RtReviewOverlay",
-  "description": "Rotten, or Fresh?",
-  "version": "0.1",
+  "name": "P.O.P - PrimeVideo Overlay Pop-up",
+  "description": "Overlays Amazon Prime Instant Video™ with Rotten Tomatoes™ movie and TV scores and ratings.",
+  "version": "1.17", 
 
   "content_scripts": [{
     "matches": [
-      "https://www.amazon.com/*"
+      "https://www.amazon.com/Amazon-Video/*"
     ],
     "js":["contentscript.js"]
   }],
