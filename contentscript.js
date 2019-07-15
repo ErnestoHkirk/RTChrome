@@ -48,6 +48,7 @@ function checkExists()
 			titleYear = document.getElementsByClassName('av-badges')[0].children[1].innerText;
 		}
 
+		// Grabs the title of the movie / tvshow from the amazon video DOM
 		var titleOfMedia = document.getElementsByClassName("av-hover-content av-narrow")[0].firstChild.firstChild.innerText;
 		
 		var formattedTitle = titleOfMedia.split(' ').join('%20');

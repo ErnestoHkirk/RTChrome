@@ -1,6 +1,6 @@
-console.log("Background is running");
+//console.log("Background is running");
 
-// receives the correct search terms from the amazon video dDOM
+// receives the correct search terms from the amazon video DOM
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
 
@@ -42,7 +42,6 @@ chrome.runtime.onMessage.addListener(
                     var parser = new DOMParser();
                     var doc = parser.parseFromString(html, "text/html");
                     
-                    // 
                     var userPercentage;
 
                     // -----------------------------------------------------------------------------------------

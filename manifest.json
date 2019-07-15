@@ -1,14 +1,16 @@
 {
   "manifest_version": 2,
 
-  "name": "P.O.P - PrimeVideo Overlay Pop-up",
-  "description": "Overlays Amazon Prime Instant Video™ with Rotten Tomatoes™ movie and TV scores and ratings.",
-  "version": "1.17", 
+  "name": "POP - PrimeVideo Overlay Pop-up",
+  "description": "Overlays Amazon Prime Video™ with Rotten Tomatoes™ movie and TV ratings.",
+  "version": "1.1", 
 
   "content_scripts": [{
     "matches": [
-      "https://www.amazon.com/Amazon-Video/*"
+      "https://www.amazon.com/Amazon-Video/*",
+      "https://www.amazon.com/b/*"
     ],
+
     "js":["contentscript.js"]
   }],
 
@@ -21,6 +23,8 @@
   "background": {
     "scripts": ["background.js"]
   },
+
+  "short_name": "POP",
 
   "web_accessible_resources": ["images/*.gif", "images/*.png"],
 
