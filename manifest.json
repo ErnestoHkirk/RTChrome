@@ -1,14 +1,16 @@
-{
+﻿{
   "manifest_version": 2,
 
-  "name": "POP - PrimeVideo Overlay Pop-up",
+  "name": "Amazon Prime Video - Rotten Tomatoes Overlay",
   "description": "Overlays Amazon Prime Video™ with Rotten Tomatoes™ movie and TV ratings.",
-  "version": "1.2", 
+  "version": "1.23", 
 
   "content_scripts": [{
     "matches": [
       "https://www.amazon.com/Amazon-Video/*",
-      "https://www.amazon.com/b/*"
+      "https://www.amazon.com/b/*",
+      "https://www.amazon.com/Prime-Video/*",
+      "https://www.amazon.com/gp/*"
     ],
 
     "js":["contentscript.js"]
