@@ -14,12 +14,19 @@ chrome.runtime.onMessage.addListener(
                 var doc = parser.parseFromString(html, "text/html");
             
                 // Finds and sets the first search term URL to rtLink
-			    var rtLink = doc.getElementsByClassName("iUh30")[0].innerText;
+                var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
+                console.log(rtLink);
+
+                // outdated pre breadcrumb search update (may need in future)
+                // var rtLink = doc.getElementsByClassName("iUh30 bc")[0].innerText;
+                
+                console.log("hello!");
+                console.log(rtLink);
 
                 // if the google search returns a url that does not contain the term 'rotten' , this will prevent the following
                 // loop from executing and will return a stirng of "page not found" to the caller
                 var checkIfCorrectUrl = true;
-                if(!rtLink.includes("rotten")) {
+                if(!rtLink.includes("rottentomatoes.com")) {
                     console.log("Rotten tomatoes url not found");
                     checkIfCorrectUrl = false;
                     sendResponse("* ---- Page not found ---- *");
@@ -29,7 +36,11 @@ chrome.runtime.onMessage.addListener(
             if(checkIfCorrectUrl == true)
             {
                 var res = rtLink.split("www.");
+
+                console.log("goodbye!");
+                console.log(res[1]);
                 url2 = 'https://' + res[1];
+                console.log(url2);
 
                 // sends the rotten tomatoes url to the fetch api and recieves the movie/tv-show RT url DOM
                 fetch(url2)
