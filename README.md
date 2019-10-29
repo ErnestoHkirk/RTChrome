@@ -8,12 +8,11 @@ This extension provides scores from Rotten Tomatoes™ to the media included wit
 
 Simply hover your mouse over a movie or TV show on the Amazon Prime Video™ website to use this extension. 
 
-If you found this extension helpful, a rating goes a long way.
-
 If you find any issues using this extension, feel free to send me a message.
 
 Disclaimer: Amazon™ , Amazon Prime Instant Video™ and Rotten Tomatoes™ are registered trademarks and have no affiliation to this extension or the author of said extension.
 
+# Change Log
 v1.29
 - Fix fatal error where extension is unable to run due to recent update to google search where all visible URLS were replaced with breadcrumbs
 
