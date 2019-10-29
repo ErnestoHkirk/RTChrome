@@ -31,5 +31,8 @@ v1.2
 v1.1
 - Change manifest with short name addition
 
+# Download Link
+https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
+
 # Disclaimer
 Amazon™ , Amazon Prime Instant Video™ and Rotten Tomatoes™ are registered trademarks and have no affiliation to this extension or the author of said extension.
