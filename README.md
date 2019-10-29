@@ -10,8 +10,6 @@ Simply hover your mouse over a movie or TV show on the Amazon Prime Video™ web
 
 If you find any issues using this extension, feel free to send me a message.
 
-Disclaimer: Amazon™ , Amazon Prime Instant Video™ and Rotten Tomatoes™ are registered trademarks and have no affiliation to this extension or the author of said extension.
-
 # Change Log
 v1.29
 - Fix fatal error where extension is unable to run due to recent update to google search where all visible URLS were replaced with breadcrumbs
@@ -31,3 +29,6 @@ v1.2
 
 v1.1
 - Change manifest with short name addition
+
+# Disclaimer
+Amazon™ , Amazon Prime Instant Video™ and Rotten Tomatoes™ are registered trademarks and have no affiliation to this extension or the author of said extension.
