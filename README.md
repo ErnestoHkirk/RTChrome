@@ -5,9 +5,7 @@ Overlays Amazon Prime Video™ with Rotten Tomatoes™ movie and TV ratings.
 POP: Prime-Video • Overlay • Pop-up
 
 This extension provides scores from Rotten Tomatoes™ to the media included within the Amazon Prime Video™ service.
-
 Simply hover your mouse over a movie or TV show on the Amazon Prime Video™ website to use this extension. 
-
 If you find any issues using this extension, feel free to send me a message.
 
 # Change Log
