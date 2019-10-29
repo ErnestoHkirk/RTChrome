@@ -1,5 +1,5 @@
 
 # Amazon Prime Video - Rotten Tomatoes Overlay
 
-![POP](/images/logo.png)
+![POP](/images/popimage.png)
 Format: ![Alt Text](url)
