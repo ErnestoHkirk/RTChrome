@@ -8,6 +8,7 @@ This chrome extension provides scores from Rotten Tomatoes™ to the media inclu
 Simply hover your mouse over a movie or TV show on the Amazon Prime Video™ website to use this extension. 
 If you find any issues using this extension, feel free to send me a message.
 
+
 ![imgFound](https://user-images.githubusercontent.com/37064367/67810619-2406c400-fa58-11e9-93d0-720b3f13600f.jpg)
 
 # Change Log
