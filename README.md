@@ -12,6 +12,10 @@ If you find any issues using this extension, feel free to send me a message.
 
 ![imgFound](https://user-images.githubusercontent.com/37064367/67810619-2406c400-fa58-11e9-93d0-720b3f13600f.jpg)
 
+
+__Link to Chrome Store__
+* https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
+
 ## Change Log
 ###### v1.29 ######
 - Fix fatal error where extension is unable to run due to recent update to google search where all visible URLS were replaced with breadcrumb styling
@@ -26,9 +30,6 @@ If you find any issues using this extension, feel free to send me a message.
   Prime Video' option under 'My account' 
 ###### v1.1 ######
 - Change manifest with short name addition
-
-__Link to Chrome Store__
-* https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Disclaimer
 Amazon™ , Amazon Prime Instant Video™ and Rotten Tomatoes™ are registered trademarks and have no affiliation to this extension or the author of said extension.
