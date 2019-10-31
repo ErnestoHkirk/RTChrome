@@ -15,20 +15,15 @@ If you find any issues using this extension, feel free to send me a message.
 ## Change Log
 v1.29
 - Fix fatal error where extension is unable to run due to recent update to google search where all visible URLS were replaced with breadcrumb styling
-
 v1.23
 - Fix issue where extension does not run if prime video URL includes '/gp/' when the user accesses the different options on the 'Amazon Prime Video' page, ex: 'all videos' , 'your videos' , 'included with prime' , etc
-
 v1.22
 - Fix issue where extension does not run if prime video URL includes '/Prime-Video/' instead of '/Amazon-Video/'
-
 v1.21
 - Change extension name and description 
-
 v1.2
 - Fix issue where extension does not run if prime video is accessed through the 'Your 
   Prime Video' option under 'My account' 
-
 v1.1
 - Change manifest with short name addition
 
