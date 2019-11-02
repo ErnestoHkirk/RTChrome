@@ -18,8 +18,16 @@ chrome.runtime.onMessage.addListener(
                 // TEST
                 console.log(doc);
 
-                // Finds and sets the first search term URL to rtLink
                 var rtLink = doc.getElementsByClassName("r")[0].lastElementChild.href
+                // Finds and sets the first search term URL to rtLink
+                if (rtLink === null){
+                    console.log("element not found, attempting alternative option");
+                    rtLink = doc.getElementsByClassName("r")[0].children[0].href;
+                    if (rtLink === null){
+                        console.log("element not found!");
+                    }
+                }
+
                 // var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
                 console.log(rtLink);
 
