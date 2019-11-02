@@ -17,6 +17,8 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
+###### v1.31 ######
+- Fix fatal error where extension attempts to access incorrect element of search resulting in 'page not found' error, and support for 'www.Amazon.de" added
 ###### v1.29 ######
 - Fix fatal error where extension is unable to run due to recent update to google search where all visible URLS were replaced with breadcrumb styling
 ###### v1.23 ######
