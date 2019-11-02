@@ -3,18 +3,24 @@
 // receives the correct search terms from the amazon video DOM
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-
+        console.log(request);
         // Sends the search terms/ formatted google search url and receives the correct google search DOM
-        fetch(request)
+        fetch(request) 
+            //credentials: 'same-origin'
     		.then(function(response) {
+                // response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
+                // request('Set-Cookie: cross-site-cookie=name; SameSite=None; Secure');
     		return response.text()
     		})
     	    .then(function(html) {
 			    var parser = new DOMParser();
                 var doc = parser.parseFromString(html, "text/html");
-            
+                // TEST
+                console.log(doc);
+
                 // Finds and sets the first search term URL to rtLink
-                var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
+                var rtLink = doc.getElementsByClassName("r")[0].lastElementChild.href
+                // var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
                 console.log(rtLink);
 
                 // outdated pre breadcrumb search update (may need in future)

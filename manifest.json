@@ -3,21 +3,21 @@
 
   "name": "Amazon Prime Video - Rotten Tomatoes Overlay",
   "description": "Overlays Amazon Prime Video™ with Rotten Tomatoes™ movie and TV ratings.",
-  "version": "1.3", 
+  "version": "1.29", 
 
   "content_scripts": [{
     "matches": [
       "https://www.amazon.com/Amazon-Video/*",
       "https://www.amazon.com/b/*",
       "https://www.amazon.com/Prime-Video/*",
-      "https://www.amazon.com/gp/*"
+      "https://www.amazon.com/gp/*",
+      "https://www.amazon.de/*"
     ],
 
     "js":["contentscript.js"]
   }],
 
   "permissions": [
-    
     "*://*.rottentomatoes.com/*",
     "*://*.google.com/*"
   ],
