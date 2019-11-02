@@ -12,11 +12,11 @@
       "https://www.amazon.com/Prime-Video/*",
       "https://www.amazon.com/gp/*",
       "https://www.amazon.de/*",
-      "https://www.amazon.com.mx/",
-      "https://www.amazon.ca/",
-      "https://www.amazon.fr/",
-      "https://www.amazon.in/",
-      "https://www.amazon.it"
+      "https://www.amazon.com.mx/*",
+      "https://www.amazon.ca/*",
+      "https://www.amazon.fr/*",
+      "https://www.amazon.in/*",
+      "https://www.amazon.it/*"
     ],
 
     "js":["contentscript.js"]
