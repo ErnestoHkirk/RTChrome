@@ -18,12 +18,12 @@ chrome.runtime.onMessage.addListener(
                 // TEST
                 console.log(doc);
 
-                var rtLink = doc.getElementsByClassName("r")[0].lastElementChild.href
+                var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
                 // Finds and sets the first search term URL to rtLink
-                if (rtLink === null){
+                if (rtLink == null){
                     console.log("element not found, attempting alternative option");
-                    rtLink = doc.getElementsByClassName("r")[0].children[0].href;
-                    if (rtLink === null){
+                    rtLink = doc.getElementsByClassName("r")[0].lastElementChild.href
+                    if (rtLink == null){
                         console.log("element not found!");
                     }
                 }
