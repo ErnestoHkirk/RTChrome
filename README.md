@@ -20,7 +20,7 @@ __Link to Chrome Store__
 ###### v1.4 ######
 - Complete overhaul of extension was necessary after Prime Video UI experienced a complete change
 - Added support for signed in users of Prime Video, and those who are not signed in
-- Extension now displays ratings when a user clicks on film/video, and when hovers over 'Customers who watched this item also watched' 
+- In addition to displaying ratings on the Prime Video homepage, extension now displays ratings when a user clicks on film/video, and when hovers over 'Customers who watched this item also watched' 
 ###### v1.37 ######
 - Domain support added for Australian users, and fixed for Brazilian users*, and all countries that use the URL (primevideo.com/*) Loading image resized to be less obtrusive 
 ###### v1.33 ######
