@@ -7,7 +7,7 @@ This extension's chrome store webpage can be found [here](https://chrome.google.
 
 This chrome extension provides scores from Rotten Tomatoes™ to the media included within the Amazon Prime Video™ service.
 Simply hover your mouse over a movie or TV show on the Amazon Prime Video™ website to use this extension. 
-If you find any issues using this extension, feel free to send me a message.
+If you find any issues using this extension, feel free to leave a message in the 'support' section.
 
 
 ![imgFound](https://user-images.githubusercontent.com/37064367/67810619-2406c400-fa58-11e9-93d0-720b3f13600f.jpg)
@@ -17,6 +17,14 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
+###### v1.4 ######
+- Complete overhaul of extension was necessary after Prime Video UI experienced a complete change
+- Added support for signed in users of Prime Video, and those who are not signed in
+- Extension now displays ratings when a user clicks on film/video, and when hovers over 'Customers who watched this item also watched' 
+###### v1.37 ######
+- Domain support added for Australian users, and fixed for Brazilian users*, and all countries that use the URL (primevideo.com/*) Loading image resized to be less obtrusive 
+###### v1.33 ######
+- Domain support added for Brazilian users *post-release-fix of this update should have fixed any more issues for Brazilian users*
 ###### v1.31 ######
 - Fix fatal error where extension attempts to access incorrect element of search resulting in 'page not found' error, and support for 'www.Amazon.de" added
 ###### v1.29 ######
