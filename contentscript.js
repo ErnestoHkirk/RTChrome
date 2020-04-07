@@ -79,7 +79,6 @@ let srcElement = e.srcElement;
 					chrome.runtime.sendMessage(
 						url,
 							function (response) {
-										
 								//console.log('correct info + hyperlinked returned');
 
 								// Creates a new span, ...
@@ -104,7 +103,7 @@ let srcElement = e.srcElement;
 								RTspan.removeChild(loading);
 					
 								//... and appends it to the RTspan
-								AZparentClass.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan); 
+								AZparentClass.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan);
 							}
 						);
 					} 
@@ -182,7 +181,6 @@ let srcElement = e.srcElement;
 			chrome.runtime.sendMessage(
 				url,
 				function (response) {
-
 					//console.log(response);
 
 					// Creates a new span, ...

@@ -19,7 +19,6 @@
       "https://www.amazon.it/*",
       "https://www.primevideo.com/*"
     ],
-
     "js":["contentscript.js"]
   }],
 
