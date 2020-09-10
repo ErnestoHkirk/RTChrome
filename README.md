@@ -17,6 +17,10 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
+###### v1.42 ######
+- Domain support added for users in the United Kingdom (www.amazon.co.uk/gp/video/)
+###### v1.41 ######
+- Update element names with new names
 ###### v1.4 ######
 - Complete overhaul of extension was necessary after Prime Video UI experienced a complete change
 - Added support for signed in users of Prime Video, and those who are not signed in

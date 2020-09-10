@@ -1,5 +1,5 @@
 var rtClassName = 'Rotten-Tomatoes';
-var slider = '_1iMj7q';
+var slider = '_21C_Q5';
 
 // Mouse listener for any move event on the current document.
 document.addEventListener('mousemove', function (e) {
@@ -262,7 +262,7 @@ let srcElement = e.srcElement;
 				var titleYear = document.querySelector('[data-automation-id="release-year-badge"]').innerText;
 
 				// Grabs the title of the movie / tvshow from the amazon video DOM
-				var titleOfMedia = document.getElementsByClassName('dv-node-dp-title avu-full-width _2Q73m9')[0].innerText;
+				var titleOfMedia = document.getElementsByClassName('_1GTSsh _2Q73m9')[0].innerText;
 				var formattedTitle = titleOfMedia.split(' ').join('%20');
 
 				url = 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20(' + titleYear + ')';
