@@ -17,7 +17,7 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
-###### v1.42 ######
+###### v1.43 ######
 - Fix fatal error where extension attempts to access incorrect element of alphabet inc search resulting in 'page not found' error
 ###### v1.42 ######
 - Domain support added for users in the United Kingdom (www.amazon.co.uk/gp/video/)
