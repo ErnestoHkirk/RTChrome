@@ -3,7 +3,8 @@
 // receives the correct search terms from the amazon video DOM
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log(request);
+        // console.log(request);
+        // console.log("Hola!")
         // Sends the search terms/ formatted google search url and receives the correct google search DOM
         fetch(request) 
             //credentials: 'same-origin'
@@ -15,27 +16,36 @@ chrome.runtime.onMessage.addListener(
     	    .then(function(html) {
 			    var parser = new DOMParser();
                 var doc = parser.parseFromString(html, "text/html");
-                // TEST
-                console.log(doc);
+               
+                // multiple depricated search terms left here, "dont throw out what you may need later"
+                // --> var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
+                
+                var rtLink = doc.getElementsByClassName("rc")[0].children[0].children[0].href
+                // console.log("rtlink: ");
+                // console.log(rtLink);
 
-                var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
-                // Finds and sets the first search term URL to rtLink
-                if (rtLink == null){
-                    console.log("element not found, attempting alternative option");
+                // Finds and searches for a new dom element/rt URL to assign rtLink if google changed its search layout again
+                // multiple depricated search terms left here, "dont throw out what you may need later"
+                if (typeof(rtLink) == 'undefined' && rtLink == null){
+                    console.log("google search -> rotten tomatoes element not found, attempting alternative option 1");
                     rtLink = doc.getElementsByClassName("r")[0].lastElementChild.href
-                    if (rtLink == null){
-                        console.log("element not found!");
+                    if (typeof(rtLink) == 'undefined' && rtLink == null){
+                        console.log("google search -> rotten tomatoes not found, attempting alternative option 2");
+                        rtLink = doc.getElementsByClassName("r")[0].children[0].href;
+                        if (typeof(rtLink) == 'undefined' && rtLink == null){
+                            console.log("rt link element on google not found");
+                        }
                     }
                 }
 
                 // var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
-                console.log(rtLink);
+                // // console.log(rtLink);
 
                 // outdated pre breadcrumb search update (may need in future)
                 // var rtLink = doc.getElementsByClassName("iUh30 bc")[0].innerText;
                 
-                console.log("hello!");
-                console.log(rtLink);
+                // // console.log("hello!");
+                // // console.log(rtLink);
 
                 // if the google search returns a url that does not contain the term 'rotten' , this will prevent the following
                 // loop from executing and will return a stirng of "page not found" to the caller

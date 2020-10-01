@@ -18,6 +18,8 @@ __Link to Chrome Store__
 
 ## Change Log
 ###### v1.42 ######
+- Fix fatal error where extension attempts to access incorrect element of alphabet inc search resulting in 'page not found' error
+###### v1.42 ######
 - Domain support added for users in the United Kingdom (www.amazon.co.uk/gp/video/)
 ###### v1.41 ######
 - Update element names with new names

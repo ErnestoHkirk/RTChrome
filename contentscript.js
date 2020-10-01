@@ -11,7 +11,8 @@ let srcElement = e.srcElement;
 	if (typeof srcElement.parentElement.parentElement !== 'undefined' && srcElement.parentElement.parentElement) {
 		// -- If grandparent exists, deal with value
 		// -- (needs new NULL check, this one leads to annoying and harmless console errors)
-
+		
+		// //console.log("test");
 		var grandparentNameOfClass = srcElement.parentElement.parentElement.className;
 		var grandparent = srcElement.parentElement.parentElement;
 		
@@ -25,7 +26,7 @@ let srcElement = e.srcElement;
 			else{
 				//console.log('Continue, slider found without av-hover event');
 				srcElement = srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
-				// console.log(srcElement);
+				// //console.log(srcElement);
 
 				if(srcElement.children[0].lastElementChild.lastElementChild.lastElementChild.className == rtClassName)
 				{
@@ -36,7 +37,7 @@ let srcElement = e.srcElement;
 
 					var amazonParentClass = srcElement.children[0].lastElementChild.lastElementChild;
 					// console.log('Amazon Parent Class located ');
-
+					// // console.log(amazonParentClass);
 					var AZparentClass = amazonParentClass;
 
 					// Checks if the pop-up has completely loaded in, if not, returns out of loop
@@ -48,7 +49,7 @@ let srcElement = e.srcElement;
 		
 					// -- Returns the value of the last child element in the Amazon parent span
 					var AZCurrentLastChild = AZparentClass.lastChild;
-		
+					
 					// -- Creates the RT span
 					var RTspan = document.createElement('span');
 					RTspan.className = "Rotten-Tomatoes";
@@ -75,12 +76,12 @@ let srcElement = e.srcElement;
 
 					// -- url used for testing
 					// url = 'https://google.com/search?q=rotten%20tomatoes%20the%20incredible%20hulk%202008'
-		
+					
 					chrome.runtime.sendMessage(
 						url,
 							function (response) {
 								//console.log('correct info + hyperlinked returned');
-
+								
 								// Creates a new span, ...
 								var ratingSpan = document.createElement("span");
 								var textnode = document.createElement("p");
