@@ -1,306 +1,210 @@
 var rtClassName = 'Rotten-Tomatoes';
-var slider = '_21C_Q5';
+var rtClassNameSP = 'Rotten-Tomatoes-SP';
 
-// Mouse listener for any move event on the current document.
-document.addEventListener('mousemove', function (e) {
-let srcElement = e.srcElement;
+// On page load listener, when page fully loaded, execute mouse listener
+window.addEventListener('load', (event) => {
 
-	// ------------------------------SLIDER CHECK----------------------------------------
-	// checking for slider element first by checking if grandparent element exists
-	// ------------------------------SLIDER CHECK----------------------------------------
-	if (typeof srcElement.parentElement.parentElement !== 'undefined' && srcElement.parentElement.parentElement) {
-		// -- If grandparent exists, deal with value
-		// -- (needs new NULL check, this one leads to annoying and harmless console errors)
-		
-		// //console.log("test");
-		var grandparentNameOfClass = srcElement.parentElement.parentElement.className;
-		var grandparent = srcElement.parentElement.parentElement;
-		
-		if(grandparentNameOfClass == slider ){
-			//console.log('Slider element found.');
+	// Mouse listener for any move event on the current document.
+	document.addEventListener('mousemove', function (e) {
+	let srcElement = e.srcElement;
 
-			if(document.getElementById('av-hover')){
-				//console.log('Break, slider but just image, (non-signed in slider)');
-			}
+// ================================ Function Definitions ===============================
 
-			else{
-				//console.log('Continue, slider found without av-hover event');
-				srcElement = srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
-				// //console.log(srcElement);
 
-				if(srcElement.children[0].lastElementChild.lastElementChild.lastElementChild.className == rtClassName)
-				{
-					//console.log("Break, slider found, but RT elem already exists");
-				}
-				else{
-					//console.log('continue, slider found without existing RT elem attached')
+// ------------------------------SLIDER CHECK----------------------------------------
+function slider(cursorElement) {
+	var sliderNoVideoOrJunk = '_1ZbScs';
+	var sliderWithVideo = 'tst-video-overlay-player-html5';
+	var sliderFound = '_2BTtIo';
 
-					var amazonParentClass = srcElement.children[0].lastElementChild.lastElementChild;
-					// console.log('Amazon Parent Class located ');
-					// // console.log(amazonParentClass);
-					var AZparentClass = amazonParentClass;
-
-					// Checks if the pop-up has completely loaded in, if not, returns out of loop
-					if(!AZparentClass)
-					{
-						//console.log("q?");
-						return;
-					}
-		
-					// -- Returns the value of the last child element in the Amazon parent span
-					var AZCurrentLastChild = AZparentClass.lastChild;
-					
-					// -- Creates the RT span
-					var RTspan = document.createElement('span');
-					RTspan.className = "Rotten-Tomatoes";
-		
-					// -- Inserts the new rotten tomatoes class before the last child element in the amazon parent class
-					AZparentClass.insertBefore(RTspan,AZCurrentLastChild.nextSibling);
-						
-					// -- Creates a loading image
-					var loading = document.createElement("img");
-					loading.src = chrome.extension.getURL("images/loading.gif");
-					AZparentClass.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(loading); 
-		
-
-					// Grabs the year the media was made
-					var titleYear = AZparentClass.children[1].innerText;
-
-					// Grabs the title of the movie / tv-show from the amazon video DOM
-					var titleOfMedia = srcElement.firstElementChild.children[2].innerText;
-					var array = titleOfMedia.split(/\r?\n/);
-					var titleOfMedia = array[0];
-					var formattedTitle = titleOfMedia.split(' ').join('%20');
-
-					url = 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20(' + titleYear + ')';
-
-					// -- url used for testing
-					// url = 'https://google.com/search?q=rotten%20tomatoes%20the%20incredible%20hulk%202008'
-					
-					chrome.runtime.sendMessage(
-						url,
-							function (response) {
-								//console.log('correct info + hyperlinked returned');
-								
-								// Creates a new span, ...
-								var ratingSpan = document.createElement("span");
-								var textnode = document.createElement("p");
-								textnode.innerHTML = response + ' ';
-								ratingSpan.appendChild(textnode);
-					
-								// Creates a new image element, grabs url, and appends it to the RTspan
-								var popcornImage = document.createElement("img");
-								popcornImage.src = chrome.extension.getURL("images/popimage.png");
-					
-								AZparentClass.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
-					
-								// Styling for the entire RTspan class
-								RTspan.style.display = "flex";
-					
-								// Styling for the ratingSpan class
-								ratingSpan.setAttribute("style","padding-top:8px; padding-left:4px;");
-					
-								// removes the loading image from the new RT class span
-								RTspan.removeChild(loading);
-					
-								//... and appends it to the RTspan
-								AZparentClass.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan);
-							}
-						);
-					} 
+	if (typeof(cursorElement) !== 'undefined'){
+		if((cursorElement.className == sliderWithVideo) && 
+		(cursorElement.parentElement.nextSibling.className)){
+			if((cursorElement.parentElement.nextSibling.className == sliderFound) 
+			&& cursorElement.parentElement.nextSibling.lastChild.className != rtClassName){
+				return cursorElement.parentElement.nextSibling;
 			}
 		}
-	}
-	// ------------------------------AV-HOVER CHECK----------------------------------------
-	// Checking for hover event - ('av-hover')
-	// (used in slider main page when not signed in, and on 'customers who watched this, 
-	// also watched' / 'recommended' both for signed in and when not signed in)
-	// ------------------------------AV-HOVER CHECK----------------------------------------
-	if(document.getElementById('av-hover')){
-		//console.log('av-hover found');
-
-		// -- Searches the DOM for the correct element
-		var popUpExists = document.getElementById('av-hover');
-
-		// -- If the RT element has already been created and added, this check will fail / result in false
-		if(document.getElementsByClassName("Rotten-Tomatoes")[0] == null)
-		{
-			//console.log('av-hover found, and RT elem does not exist');
-			var RTClassDoesNotExist = true;
-		}
-
-		// -- If the RT elem does not exist, and the av-hover is completely loaded in, continue
-		if(popUpExists && RTClassDoesNotExist) 
-		{
-			//console.log('rt elem does not exist, and av-hover exists, continue');
-
-			// locates the correct parent element from the av-hover
-			var amazonParentClass = document.getElementsByClassName('av-ratings-badges');
-
-			// Returns the amazon parent class from the pop-up
-			var AZparentClass = amazonParentClass[0];
-
-			// Checks if the pop-up has completely loaded in, if not, returns out of loop
-			if(!AZparentClass)
-			{
-				//console.log('amazon parent class not yet loaded in');
-				return;
+		else if((cursorElement.className == sliderNoVideoOrJunk) && 
+		(cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling)){
+			if((cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling.className == sliderFound)
+			&& cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling.lastChild.className != rtClassName){
+				return cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling;
 			}
-
-			// Returns the value of the last child element in the Amazon parent span
-			var AZfinalChild = AZparentClass.lastChild;
-			
-			// Creates the RT span
-			var RTspan = document.createElement('span');
-			RTspan.className = "Rotten-Tomatoes";
-
-			// inserts the new rotten tomatoes class before the last child element in the amazon parent class
-			AZparentClass.insertBefore(RTspan,AZfinalChild.nextSibling);
-
-			// Creates a loading image
-			var loading = document.createElement("img");
-			loading.src = chrome.extension.getURL("images/loading.gif");
-			document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(loading); 
-			
-			// Grabs the year the media was made
-			var titleYear = document.getElementsByClassName('av-badges')[0].firstChild.innerText;
-
-			// Checks for correct element
-			if (titleYear.length > 4)
-			{
-				// -- legacy code, perhaps redundant? 
-				titleYear = document.getElementsByClassName('av-badges')[0].children[1].innerText;
-			}
-
-			// Grabs the title of the movie / tvshow from the amazon video DOM
-			var titleOfMedia = document.getElementsByClassName("av-hover-content av-narrow")[0].firstChild.firstChild.innerText;
-			
-			var formattedTitle = titleOfMedia.split(' ').join('%20');
-
-			url = 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20(' + titleYear + ')';
-
-			chrome.runtime.sendMessage(
-				url,
-				function (response) {
-					//console.log(response);
-
-					// Creates a new span, ...
-					var ratingSpan = document.createElement("span");
-					var textnode = document.createElement("p");
-					textnode.innerHTML = response + ' ';
-					ratingSpan.appendChild(textnode);
-
-					// Creates a new image element, grabs url, and appends it to the RTspan
-					var popcornImage = document.createElement("img");
-					popcornImage.src = chrome.extension.getURL("images/popimage.png");
-
-					document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
-
-					// Styling for the entire RTspan class
-					RTspan.style.display = "flex";
-
-					// Styling for the ratingSpan class
-					ratingSpan.setAttribute("style","padding-top:8px; padding-left:4px;");
-
-					// removes the loading image from the new RT class span
-					RTspan.removeChild(loading);
-
-					//... and appends it to the RTspan
-					document.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan); 
-				}
-			);
-		}
-	}
-	// ------------------------------SINGLE PAGE OF MEDIA CHECK----------------------------------------
-	// checks for the existence of a single page of media, indepedent from the other two checks,
-	// 'rotten tomatoess' extra [s] in div, because recommended live on the same page (bottom)
-	// ------------------------------SINGLE PAGE OF MEDIA CHECK----------------------------------------
-	if(document.getElementsByClassName('av-detail-section')[0]){
-		//console.log('Single page found.');
-		if(document.getElementById('av-hover')){
-			//console.log('Break, single page found, but av-hover.');
 		}
 		else{
-			var popUpExists = document.getElementsByClassName('av-detail-section')[0];
+			return false;
+		}	
+	}
+	else{
+		return false;
+	}
+}
 
-			if(document.getElementsByClassName("Rotten-Tomatoess")[0] == null)
-			{
-				var RTClassDoesNotExist = true;
-			}
+// ------------------------------SLIDER ON SINGLE PAGE CHECK----------------------------------------
+function sliderOnSinglePage(cursorElement){
+	var sliderOnPage = '_19fgeo';
+	var sliderFound = '_2BTtIo';
 
-			if(popUpExists && RTClassDoesNotExist) 
-			{
-				// locates the correct element from the amazon pop-up
-				var amazonParentClass = document.getElementsByClassName('_3QwtCH _16AW_S _2LF_6p dv-node-dp-badges uAeEjV');
-				//console.log(document.getElementsByClassName('av-ratings-badges')[0]);
-
-				// Returns the amazon parent class from the pop-up
-				var AZparentClass = amazonParentClass[0];
-
-				// Checks if the pop-up has completely loaded in, if not, returns out of loop
-				if(!AZparentClass)
-				{
-					return;
-				}
-
-				// Returns the value of the last child element in the Amazon parent span
-				var AZfinalChild = AZparentClass.lastChild;
-				//console.log(AZfinalChild);
-
-				// Creates the RT span
-				var RTspan = document.createElement('span');
-				RTspan.className = "Rotten-Tomatoess";
-
-				// inserts the new rotten tomatoes class before the last child element in the amazon parent class
-				AZparentClass.insertBefore(RTspan,AZfinalChild.nextSibling);
-
-				// Creates a loading image
-				var loading = document.createElement("img");
-				loading.src = chrome.extension.getURL("images/loading.gif");
-				document.getElementsByClassName("Rotten-Tomatoess")[0].appendChild(loading); 
-				
-				// Grabs the year the media was made
-				var titleYear = document.querySelector('[data-automation-id="release-year-badge"]').innerText;
-
-				// Grabs the title of the movie / tvshow from the amazon video DOM
-				var titleOfMedia = document.getElementsByClassName('_1GTSsh _2Q73m9')[0].innerText;
-				var formattedTitle = titleOfMedia.split(' ').join('%20');
-
-				url = 'https://google.com/search?q=rotten%20tomatoes%20' + formattedTitle + '%20(' + titleYear + ')';
-
-				chrome.runtime.sendMessage(
-					url,
-					function (response) {
-
-						//console.log(response);
-
-						// Creates a new span, ...
-						var ratingSpan = document.createElement("span");
-						var textnode = document.createElement("p");
-						textnode.innerHTML = response + ' ';
-						ratingSpan.appendChild(textnode);
-
-						// Creates a new image element, grabs url, and appends it to the RTspan
-						var popcornImage = document.createElement("img");
-						popcornImage.src = chrome.extension.getURL("images/popimage.png");
-
-						document.getElementsByClassName("Rotten-Tomatoess")[0].appendChild(popcornImage); 
-
-						// Styling for the entire RTspan class
-						RTspan.style.display = "flex";
-
-						// Styling for the ratingSpan class
-						ratingSpan.setAttribute("style","padding-top:8px; padding-left:4px;");
-
-						// removes the loading image from the new RT class span
-						RTspan.removeChild(loading);
-
-						//... and appends it to the RTspan
-						document.getElementsByClassName("Rotten-Tomatoess")[0].appendChild(ratingSpan); 
-						}
-					);
-				}
+	if (typeof(cursorElement) !== 'undefined'){
+		if((cursorElement.className == sliderOnPage) && 
+		(cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling)){
+			if((cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling.className == sliderFound)
+			&& cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling.lastChild.className != rtClassName){
+				console.log(cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling);
+				return cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling;
 			}
 		}
-}, false);
+		else{
+			return false;
+		}
+	}
+	else{
+		return false;
+	}
+}
 
+// ------------------------------SINGLE PAGE CHECK----------------------------------------
+function singlePage(){
+	if(document.getElementsByClassName("Rotten-Tomatoes-SP")[0] == null){
+		if(document.getElementsByClassName('av-detail-section')[0]){
+			return document.getElementsByClassName('_3QwtCH _16AW_S _2LF_6p dv-node-dp-badges uAeEjV')[0];
+		}
+		else
+			return false;
+	}
+}
+
+// --------------------APPEND ROTTEN TOMATOES SPAN/DIV - (LOADING) --------------------------
+function appendRottenTomatoes(AZparentClass,nameOfSpan){
+	// -- Creates the RT span
+	var RTspan = document.createElement('span');
+	RTspan.className = nameOfSpan;
+	AZLastChild = AZparentClass.lastChild;
+
+	// -- Inserts the new rotten tomatoes class before the last child element in the amazon parent class
+	AZparentClass.insertBefore(RTspan,AZLastChild.nextSibling);
+						
+	// -- Creates a loading image
+	var loading = document.createElement("img");
+	loading.src = chrome.extension.getURL("images/loading.gif");
+	loading.className = "loading";
+
+	// -- Appends loading.gif to the RTspan
+	if(nameOfSpan == 'Rotten-Tomatoes'){
+		AZparentClass.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(loading); 
+	}
+	else if(nameOfSpan == 'Rotten-Tomatoes-SP'){
+		AZparentClass.getElementsByClassName("Rotten-Tomatoes-SP")[0].appendChild(loading); 
+	}
+	return RTspan;
+}
+
+// --------------- SEARCHES FOR CORRECT SEARCH TERMS FOR SLIDER ELEMENT ---------------------
+function sliderGoogleUrl(sliderParentElement){
+	// Grabs the year the media was made
+	if(sliderParentElement.getElementsByClassName('_2yYtnp U7tX5g')[0]){
+		var titleYear = sliderParentElement.getElementsByClassName('_2yYtnp U7tX5g')[0].innerText;
+		if(titleYear.includes("min")){
+			titleYear = sliderParentElement.getElementsByClassName('_2yYtnp U7tX5g')[1].innerText;
+		}
+	}
+	
+	// Grabs the title of the movie / tvshow from the amazon video DOM
+	var titleOfMedia = sliderParentElement.getElementsByClassName('_1l3nhs tst-hover-title')[0].innerText;
+
+	// Formats and appends data to create google search
+	var formattedTitle = titleOfMedia.split(' ').join('%20');
+	url = 'https://google.com/search?q=Rotten%20Tomatoes%20' + formattedTitle + '%20' + '(' + titleYear + ')' + '%20';
+	return url;
+}
+
+// --------------- SEARCHES FOR CORRECT SEARCH TERMS FOR SINGLE PAGE ---------------------
+function singlePageGoogleUrl(){
+	// Grabs the year the media was made
+	var titleYear = document.querySelector('[data-automation-id="release-year-badge"]').innerText;
+
+	// Grabs the title of the movie / tvshow from the amazon video DOM
+	var titleOfMedia = document.getElementsByClassName('_1GTSsh _2Q73m9')[0].innerText;
+	
+	// Formats and appends data to create google search
+	var formattedTitle = titleOfMedia.split(' ').join('%20');
+	url = 'https://google.com/search?q=Rotten%20Tomatoes%20' + formattedTitle + '%20' + '(' + titleYear + ')' + '%20';
+	return url;
+}
+
+// ----------- SENDS CORRECT GOOGLE SEARCH URL TO BACKGROUND.JS FOR FETCH ----------------
+function search(url, RTspan, RTParentElem){
+	chrome.runtime.sendMessage(
+		url,
+			function (response) {
+				//console.log('correct info + hyperlinked returned');
+				append(response, RTspan, RTParentElem);
+			}
+		);
+}
+
+// ------- APPENDS CORRECT ROTTEN TOMATO INFO TO RTSPAN AND REMOVES LOADING.GIF ----------
+function append(RTinfo, RTspan, RTParentElem){
+	// Creates a new span, ...
+	var ratingSpan = document.createElement("span");
+	var textnode = document.createElement("p");
+	textnode.innerHTML = RTinfo + ' ';
+	ratingSpan.appendChild(textnode);
+	
+	// Creates a new image element, grabs url, and appends it to the RTspan
+	var popcornImage = document.createElement("img");
+	popcornImage.src = chrome.extension.getURL("images/popimage.png");
+
+	// Appends Popcorn image depending on if element is on single page / slider
+	if(RTParentElem.getElementsByClassName("Rotten-Tomatoes")[0]){
+		RTParentElem.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(popcornImage); 
+	}
+	else{
+		RTParentElem.getElementsByClassName("Rotten-Tomatoes-SP")[0].appendChild(popcornImage); 
+	}
+	
+	// Styling for the entire RTspan class
+	RTspan.style.display = "flex";
+	
+	// Styling for the ratingSpan class
+	ratingSpan.setAttribute("style","padding-top:8px; padding-left:4px;");
+
+	// Finds loading image in RTspan
+	loading = RTspan.getElementsByClassName("loading")[0];
+	// .. and removes the loading image from the new RTspan
+	RTspan.removeChild(loading);
+	
+	// Appends data to the RTspan
+	if(RTParentElem.getElementsByClassName("Rotten-Tomatoes")[0]){
+		RTParentElem.getElementsByClassName("Rotten-Tomatoes")[0].appendChild(ratingSpan);
+	}
+	else{
+		RTParentElem.getElementsByClassName("Rotten-Tomatoes-SP")[0].appendChild(ratingSpan);
+	}
+	
+}
+// ====================== End of Function Definitions / Program Start =========================
+
+		var x = slider(srcElement);             			     // Searches for slider element
+		var y = sliderOnSinglePage(srcElement);   				 // Searches for slider on single page
+		var z = singlePage();                     				 // Searches for single page 
+
+		if(x){                                    
+			var RTspan = appendRottenTomatoes(x,rtClassName);    // Appends to slider element
+			url = sliderGoogleUrl(x);
+			search(url, RTspan, x);
+		}
+		else if(y){                              
+			var RTspan = appendRottenTomatoes(y,rtClassName);    // Appends to slider on single page
+			url = sliderGoogleUrl(y);
+			search(url, RTspan, y);
+		}
+		else if(z){                           
+			var RTspan = appendRottenTomatoes(z,rtClassNameSP);  // Appends to single page 
+			url = singlePageGoogleUrl();
+			search(url, RTspan, z);
+		}
+
+	}, false);
+});

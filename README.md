@@ -17,6 +17,9 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
+###### v1.5 ######
+- Added support for checking sliders below single page of media. Refactored majority of extension for readability,
+efficiency, and ease of use.
 ###### v1.43 ######
 - Fix fatal error where extension attempts to access incorrect element of alphabet inc search resulting in 'page not found' error
 ###### v1.42 ######
