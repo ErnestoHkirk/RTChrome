@@ -17,6 +17,8 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
+###### v1.52 ######
+- Added domain support for known smile.amazon URL extensions
 ###### v1.51 ######
 - Fix fatal error where extension attempts to access incorrect element of Prime Video element on sliders causing sliders not displaying ratings.
 ###### v1.5 ######
