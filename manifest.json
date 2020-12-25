@@ -19,6 +19,7 @@
       "https://www.amazon.it/*",
       "https://www.primevideo.com/*",
       "https://www.amazon.co.uk/gp/video/*",
+      "https://www.amazon.co.uk/*",
       "https://smile.amazon.com/Amazon-Video/*",
       "https://smile.amazon.com/b/*",
       "https://smile.amazon.com/Prime-Video/*",
@@ -30,7 +31,8 @@
       "https://smile.amazon.in/*",
       "https://smile.amazon.it/*",
       "https://smile.primevideo.com/*",
-      "https://smile.amazon.co.uk/gp/video/*"
+      "https://smile.amazon.co.uk/gp/video/*",
+      "https://smile.amazon.co.uk/*"
     ],
     "js":["contentscript.js"]
   }],
