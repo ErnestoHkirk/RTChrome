@@ -20,7 +20,8 @@ chrome.runtime.onMessage.addListener(
                 // multiple depricated search terms left here, "dont throw out what you may need later"
                 // --> var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
                 
-                var rtLink = doc.getElementsByClassName("rc")[0].children[0].children[0].href
+                //var rtLink = doc.getElementsByClassName("rc")[0].children[0].children[0].href
+                var rtLink = doc.getElementsByClassName("tF2Cxc")[0].children[0].children[0].href
                 // console.log("rtlink: ");
                 // console.log(rtLink);
 

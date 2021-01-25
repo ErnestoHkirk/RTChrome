@@ -17,6 +17,8 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
+###### v1.53 ######
+- Fix fatal error caused by google search engine update
 ###### v1.52 ######
 - Added domain support for known smile.amazon URL extensions
 ###### v1.51 ######

@@ -114,7 +114,7 @@ function appendRottenTomatoes(AZparentClass,nameOfSpan){
 // --------------- SEARCHES FOR CORRECT SEARCH TERMS FOR SLIDER ELEMENT ---------------------
 function sliderGoogleUrl(sliderParentElement){
 	// Grabs the year the media was made
-	//console.log(sliderParentElement)
+	console.log(sliderParentElement)
 	//console.log(sliderParentElement.getElementsByClassName('_2yYtnp U7tX5g')[0])
 	//console.log(sliderParentElement.getElementsByClassName('_28Acs_ tst-hover-title')[0].innerText);
 
@@ -124,15 +124,15 @@ function sliderGoogleUrl(sliderParentElement){
 			titleYear = sliderParentElement.getElementsByClassName('_1qxpZ5 _2wV5Zf')[1].innerText;
 		}
 	}
-	//console.log(titleYear);
+	console.log(titleYear);
 	// Grabs the title of the movie / tvshow from the amazon video DOM
 	//var titleOfMedia = sliderParentElement.getElementsByClassName('_1l3nhs tst-hover-title')[0].innerText;
 	var titleOfMedia = sliderParentElement.getElementsByClassName('_28Acs_ tst-hover-title')[0].innerText;
-	//console.log(titleOfMedia)
+	console.log(titleOfMedia)
 	// Formats and appends data to create google search
 	var formattedTitle = titleOfMedia.split(' ').join('%20');
 	url = 'https://google.com/search?q=Rotten%20Tomatoes%20' + formattedTitle + '%20' + '(' + titleYear + ')' + '%20';
-	//console.log(url)
+	console.log(url)
 	return url;
 }
 
@@ -147,6 +147,7 @@ function singlePageGoogleUrl(){
 	// Formats and appends data to create google search
 	var formattedTitle = titleOfMedia.split(' ').join('%20');
 	url = 'https://google.com/search?q=Rotten%20Tomatoes%20' + formattedTitle + '%20' + '(' + titleYear + ')' + '%20';
+	console.log(url)
 	return url;
 }
 
