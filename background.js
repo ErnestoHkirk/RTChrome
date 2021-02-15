@@ -1,53 +1,35 @@
-//console.log("Background is running");
+//console.log("Background.js is running");
 
-// receives the correct search terms from the amazon video DOM
+// Receives the correct search terms from the amazon video DOM
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         // console.log(request);
-        // console.log("Hola!")
         // Sends the search terms/ formatted google search url and receives the correct google search DOM
         fetch(request) 
-            //credentials: 'same-origin'
     		.then(function(response) {
-                // response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
-                // request('Set-Cookie: cross-site-cookie=name; SameSite=None; Secure');
     		return response.text()
     		})
     	    .then(function(html) {
 			    var parser = new DOMParser();
                 var doc = parser.parseFromString(html, "text/html");
                
-                // multiple depricated search terms left here, "dont throw out what you may need later"
-                // --> var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
-                
-                //var rtLink = doc.getElementsByClassName("rc")[0].children[0].children[0].href
+                // Current correct google search/rotten tomato url
                 var rtLink = doc.getElementsByClassName("tF2Cxc")[0].children[0].children[0].href
-                // console.log("rtlink: ");
                 // console.log(rtLink);
 
                 // Finds and searches for a new dom element/rt URL to assign rtLink if google changed its search layout again
                 // multiple depricated search terms left here, "dont throw out what you may need later"
-                if (typeof(rtLink) == 'undefined' && rtLink == null){
+                if (typeof(rtLink) === 'undefined' && rtLink === null){
                     console.log("google search -> rotten tomatoes element not found, attempting alternative option 1");
                     rtLink = doc.getElementsByClassName("r")[0].lastElementChild.href
-                    if (typeof(rtLink) == 'undefined' && rtLink == null){
+                    if (typeof(rtLink) === 'undefined' && rtLink === null){
                         console.log("google search -> rotten tomatoes not found, attempting alternative option 2");
                         rtLink = doc.getElementsByClassName("r")[0].children[0].href;
-                        if (typeof(rtLink) == 'undefined' && rtLink == null){
+                        if (typeof(rtLink) === 'undefined' && rtLink === null){
                             console.log("rt link element on google not found");
                         }
                     }
                 }
-
-                // var rtLink = doc.getElementsByClassName("r")[0].children[0].href;
-                // // console.log(rtLink);
-
-                // outdated pre breadcrumb search update (may need in future)
-                // var rtLink = doc.getElementsByClassName("iUh30 bc")[0].innerText;
-                
-                // // console.log("hello!");
-                // // console.log(rtLink);
-
                 // if the google search returns a url that does not contain the term 'rotten' , this will prevent the following
                 // loop from executing and will return a stirng of "page not found" to the caller
                 var checkIfCorrectUrl = true;
@@ -62,113 +44,56 @@ chrome.runtime.onMessage.addListener(
             {
                 var res = rtLink.split("www.");
 
-                console.log("goodbye!");
-                console.log(res[1]);
+                //console.log(res[1]);
                 url2 = 'https://' + res[1];
-                console.log(url2);
+                //console.log(url2);
 
                 // sends the rotten tomatoes url to the fetch api and recieves the movie/tv-show RT url DOM
                 fetch(url2)
                     .then(function(response) {
                     return response.text()
                     })
-                    
-                    // 
                     .then(function(html) {
                     var parser = new DOMParser();
                     var doc = parser.parseFromString(html, "text/html");
                     
-                    var userPercentage;
+                    var userPercentage = "Page Found"
+                    var numUserRatings = "N/A";
 
-                    // -----------------------------------------------------------------------------------------
-                    // Searches for the correct user ratings percentage, multiple elements with the same name 
-                    // exist and must therefore be all checked for validity
-                    // -----------------------------------------------------------------------------------------
-                    var onlyOneElementExists = false;
-                    var noElementsExist = false;
-
-                    if(doc.getElementsByClassName("mop-ratings-wrap__percentage")[1] === undefined) { 
-                        console.log("Only one element may or may not exist"); 
-                        onlyOneElementExists = true;
-                    }
-
-                    if(doc.getElementsByClassName("mop-ratings-wrap__percentage")[0] === undefined) { 
-                        console.log("No elements exist! Wrong URL"); 
-                        noElementsExist = true;
-                    }
-
-                    if(noElementsExist)
-                    {
-                        userPercentage = "No score found";
-                    }
-                    else if (onlyOneElementExists)
-                    {
-                        userPercentage = doc.getElementsByClassName("mop-ratings-wrap__percentage")[0].innerHTML;
-                    }
-                    else // More than one element exists
-                    {
-                        userPercentage = doc.getElementsByClassName("mop-ratings-wrap__percentage")[1].innerHTML;
-                    }
-                    // -----------------------------------------------------------------------------------------
-
-
-
-                    // -----------------------------------------------------------------------------------------
-                    // Searches for the correct 'total number of user ratings' element, multiple elements with 
-                    // the same name exist and must therefore all be checked for validity
-                    // -----------------------------------------------------------------------------------------
-                    var numUserRatings = "N/A ";
-                    var numUserRatings2 = "";
-
-                    var noScoreAtIndex2 = false;
-                    var noScoreAtIndex3 = false;
-
-                    var noUserScore1 = true;
-                    var noUserScore2 = true;
-
-                    if (doc.getElementsByClassName("mop-ratings-wrap__text--small")[2] === undefined)  {
-                        console.log("No user scores exist at element 3");
-                        noScoreAtIndex2 = true;
+                    //Checks for type of rotten tomato page, movie or tv-show
+                    if(url2[27] == 'm'){
+                        //console.log("Movie found.");
+                        if(typeof(doc.querySelector("score-board").children[3].innerText !== 'undefined')){
+                            // Total number of User Ratings
+                            numUserRatings = doc.querySelector("score-board").children[3].innerText;  
                         }
+                        //Formatting
+                        var x = doc.querySelector("score-board").outerHTML;
+                        var y = x.split(" ", 3);
+                        var z = y[2].split("\"", 2);
+                        console.log(z[1]);
+                        xx = numUserRatings.split("\+", 2);
+                        numUserRatings = xx[0] + "+ User " + xx[1];
+                        console.log(xx);
+                        userPercentage = z[1] + "%";
 
-                    if (doc.getElementsByClassName("mop-ratings-wrap__text--small")[3] === undefined)  {
-                        console.log("No user scores exist at element 4");
-                        noScoreAtIndex3 = true;
+                        //console.log(numUserRatings);
+                        //console.log(userPercentage);
                     }
-                    
-                    if(!noScoreAtIndex2)
-                    {
-                        numUserRatings = doc.getElementsByClassName("mop-ratings-wrap__text--small")[2].innerHTML;
+                    else if(url2[27] == 't'){
+                        //console.log("TV-show found.");
+                        if(doc.getElementsByClassName("mop-ratings-wrap__half audience-score")[0] !== undefined){
+                            var b = doc.getElementsByClassName("mop-ratings-wrap__half audience-score")[0].firstElementChild.innerText
+                            b = b.replace(/\s/g, '');
+                            console.log(b);
+                            if(b.search(/[%]/g) != -1){
+                                userPercentage = b;
+                                numUserRatings = "Audience Score"
+                            }
+                        }
                     }
-                
-                    if(!noScoreAtIndex3)
-                    {
-                        numUserRatings2 = doc.getElementsByClassName("mop-ratings-wrap__text--small")[3].innerHTML;
-                    }
-
-                    if(numUserRatings.includes("User"))
-                    {
-                        numUserRatings = doc.getElementsByClassName("mop-ratings-wrap__text--small")[2].innerHTML;
-                        noUserScore1 = false;
-                    }
-
-                    if(numUserRatings2.includes("User"))
-                    {
-                        numUserRatings = doc.getElementsByClassName("mop-ratings-wrap__text--small")[3].innerHTML;
-                        noUserScore2 = false;
-                    }
-                    
-                    // If there is not enough user scores, or for whatever reason the scores are not shown, this will execute
-                    if (noUserScore1 && noUserScore2)
-                    {
-                        numUserRatings = "User Ratings: N/A"
-                    }
-                    // -----------------------------------------------------------------------------------------
-
-                    var userPercentageAndNumberOfUserScores;
-
                     // Stores a string containing the aggregated value of the user percentages, and the number of user scores
-                    userPercentageAndNumberOfUserScores = userPercentage + '  ' + '━' + '  ' + numUserRatings + '     ';
+                    var userPercentageAndNumberOfUserScores = userPercentage + '  ' + '━' + '  ' + numUserRatings + '     ';
 
                     // Sends the response back to the caller with the embedded url 
                     sendResponse(userPercentageAndNumberOfUserScores.link(url2));

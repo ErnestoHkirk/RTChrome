@@ -13,20 +13,15 @@ window.addEventListener('load', (event) => {
 
 // ------------------------------SLIDER CHECK----------------------------------------
 function slider(cursorElement) {
-	var sliderNoVideoOrJunk = '_1jZuBp';
-	//var sliderNoVideoOrJunk = '_1ZbScs';
-
+	var sliderNoVideoOrJunk = '_1w0pmh';
 	var sliderWithVideo = 'tst-video-overlay-player-html5';
+	var sliderFound = 'lAtJLC';
 	
-	var sliderFound = '_1yEE4p';
-	//var sliderFound = '_2BTtIo';
-
-	//console.log (cursorElement.className);
-	//console.log (cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling)
+	//console.log(cursorElement);
 
 	if (typeof(cursorElement) !== 'undefined'){
-		if((cursorElement.className == sliderWithVideo) && 
-		(cursorElement.parentElement.nextSibling.className)){
+		if(cursorElement.className == sliderWithVideo){
+			//console.log(cursorElement.parentElement.nextSibling.className);
 			if((cursorElement.parentElement.nextSibling.className == sliderFound) 
 			&& cursorElement.parentElement.nextSibling.lastChild.className != rtClassName){
 				return cursorElement.parentElement.nextSibling;
@@ -34,6 +29,7 @@ function slider(cursorElement) {
 		}
 		else if((cursorElement.className == sliderNoVideoOrJunk) && 
 		(cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling)){
+			//console.log(cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling);
 			if((cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling.className == sliderFound)
 			&& cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling.lastChild.className != rtClassName){
 				return cursorElement.parentElement.parentElement.parentElement.parentElement.nextSibling;
@@ -51,8 +47,8 @@ function slider(cursorElement) {
 // ------------------------------SLIDER ON SINGLE PAGE CHECK----------------------------------------
 function sliderOnSinglePage(cursorElement){
 	//console.log(cursorElement);
-	var sliderOnPage = 'v7NF8z _19fgeo _1V7UYW';
-	var sliderFound = '_1yEE4p';
+	var sliderOnPage = 'Zk8aEm _1EcvsB _1Asy_o';
+	var sliderFound = 'lAtJLC';
 
 	if (typeof(cursorElement) !== 'undefined'){
 		if((cursorElement.className == sliderOnPage) && 
@@ -75,7 +71,7 @@ function sliderOnSinglePage(cursorElement){
 function singlePage(){
 	if(document.getElementsByClassName("Rotten-Tomatoes-SP")[0] == null){
 		if(document.getElementsByClassName('av-detail-section')[0]){
-			return document.getElementsByClassName('_3QwtCH _16AW_S _2LF_6p dv-node-dp-badges uAeEjV')[0];
+			return document.getElementsByClassName('_3QwtCH _16AW_S _2LF_6p dv-node-dp-badges _3vxMzE HaWow5')[0];
 		}
 		else
 			return false;
@@ -114,25 +110,23 @@ function appendRottenTomatoes(AZparentClass,nameOfSpan){
 // --------------- SEARCHES FOR CORRECT SEARCH TERMS FOR SLIDER ELEMENT ---------------------
 function sliderGoogleUrl(sliderParentElement){
 	// Grabs the year the media was made
-	//console.log(sliderParentElement)
-	//console.log(sliderParentElement.getElementsByClassName('_2yYtnp U7tX5g')[0])
-	//console.log(sliderParentElement.getElementsByClassName('_28Acs_ tst-hover-title')[0].innerText);
-
-	if(sliderParentElement.getElementsByClassName('_1qxpZ5 _2wV5Zf')[0]){
-		var titleYear = sliderParentElement.getElementsByClassName('_1qxpZ5 _2wV5Zf')[0].innerText;
+	if(sliderParentElement.getElementsByClassName('nPUwP8 _2Z_R2D')[0]){
+		var titleYear = sliderParentElement.getElementsByClassName('nPUwP8 _2Z_R2D')[0].innerText;
 		if(titleYear.includes("min")){
-			titleYear = sliderParentElement.getElementsByClassName('_1qxpZ5 _2wV5Zf')[1].innerText;
+			titleYear = sliderParentElement.getElementsByClassName('nPUwP8 _2Z_R2D')[1].innerText;
 		}
 	}
 	//console.log(titleYear);
+
 	// Grabs the title of the movie / tvshow from the amazon video DOM
-	//var titleOfMedia = sliderParentElement.getElementsByClassName('_1l3nhs tst-hover-title')[0].innerText;
-	var titleOfMedia = sliderParentElement.getElementsByClassName('_28Acs_ tst-hover-title')[0].innerText;
+	var titleOfMedia = sliderParentElement.getElementsByClassName('_2MiS8F tst-hover-title')[0].innerText;
 	//console.log(titleOfMedia)
+
 	// Formats and appends data to create google search
 	var formattedTitle = titleOfMedia.split(' ').join('%20');
 	url = 'https://google.com/search?q=Rotten%20Tomatoes%20' + formattedTitle + '%20' + '(' + titleYear + ')' + '%20';
 	//console.log(url)
+
 	return url;
 }
 
@@ -140,14 +134,15 @@ function sliderGoogleUrl(sliderParentElement){
 function singlePageGoogleUrl(){
 	// Grabs the year the media was made
 	var titleYear = document.querySelector('[data-automation-id="release-year-badge"]').innerText;
-
+	
 	// Grabs the title of the movie / tvshow from the amazon video DOM
-	var titleOfMedia = document.getElementsByClassName('_1GTSsh _2Q73m9')[0].innerText;
+	var titleOfMedia = document.getElementsByClassName('_2IIDsE _3I-nQy')[0].innerText;
 	
 	// Formats and appends data to create google search
 	var formattedTitle = titleOfMedia.split(' ').join('%20');
 	url = 'https://google.com/search?q=Rotten%20Tomatoes%20' + formattedTitle + '%20' + '(' + titleYear + ')' + '%20';
 	//console.log(url)
+	
 	return url;
 }
 
@@ -211,19 +206,19 @@ function append(RTinfo, RTspan, RTParentElem){
 		var z = singlePage();                     				 // Searches for single page 
 
 		if(x){        
-			//console.log("true1!");                         
+			//console.log("Moe - 1");                         
 			var RTspan = appendRottenTomatoes(x,rtClassName);    // Appends to slider element
 			url = sliderGoogleUrl(x);
 			search(url, RTspan, x);
 		}
 		else if(y){      
-			//console.log("true2!");                          
+			//console.log("Curly - 2");                          
 			var RTspan = appendRottenTomatoes(y,rtClassName);    // Appends to slider on single page
 			url = sliderGoogleUrl(y);
 			search(url, RTspan, y);
 		}
 		else if(z){      
-			//console.log("true3!");                       
+			//console.log("Larry - 3");                       
 			var RTspan = appendRottenTomatoes(z,rtClassNameSP);  // Appends to single page 
 			url = singlePageGoogleUrl();
 			search(url, RTspan, z);
