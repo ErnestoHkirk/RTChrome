@@ -19,7 +19,7 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
-###### v1.6 ######
+###### v1.58 ######
 - Fix multiple fatal errors caused by rotten tomato and amazom prime video site updates
 ###### v1.53 ######
 - Fix fatal error caused by google search engine update
