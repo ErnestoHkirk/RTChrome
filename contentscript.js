@@ -209,7 +209,7 @@ function append(RTinfo, RTspan, RTParentElem){
 			//console.log("Moe - 1");                         
 			var RTspan = appendRottenTomatoes(x,rtClassName);    // Appends to slider element
 			url = sliderGoogleUrl(x);
-			console.log(url);
+			//console.log(url);
 			search(url, RTspan, x);
 		}
 		else if(y){      

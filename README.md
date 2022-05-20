@@ -19,6 +19,9 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
+
+###### v1.60 ######
+- Fix error caused by  google search element change (again)
 ###### v1.59 ######
 - Fix errors caused by google search element change
 ###### v1.58 ######

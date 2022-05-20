@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
       // Current correct google search/rotten tomato url
       var rtLink = doc.getElementsByClassName("yuRUbf")[0].children[0].href;
-      console.log(rtLink);
+      //console.log(rtLink);
 
       // Finds and searches for a new dom element/rt URL to assign rtLink if google changed its search layout again
       // multiple depricated search terms left here, "dont throw out what you may need later"
