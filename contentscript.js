@@ -13,11 +13,11 @@ window.addEventListener('load', (event) => {
 
 // ------------------------------SLIDER CHECK----------------------------------------
 function slider(cursorElement) {
-	var sliderNoVideoOrJunk = '_1w0pmh';
+	var sliderNoVideoOrJunk = '_3RLSRf';
 	var sliderWithVideo = 'tst-video-overlay-player-html5';
 	var sliderFound = 'lAtJLC';
 	
-	//console.log(cursorElement);
+	//console.log(cursorElement.className);
 
 	if (typeof(cursorElement) !== 'undefined'){
 		if(cursorElement.className == sliderWithVideo){
