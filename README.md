@@ -19,7 +19,8 @@ __Link to Chrome Store__
 * https://chrome.google.com/webstore/detail/amazon-prime-video-rotten/hfemgdpfoemphmhakjpcbepaggjmhjci
 
 ## Change Log
-
+###### v1.61 ######
+- Add static slider, (non-video), support"
 ###### v1.60 ######
 - Fix error caused by  google search element change (again)
 ###### v1.59 ######
